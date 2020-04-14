@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Database_reader_V2.Models.Report>
+
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rep_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rep_Lot_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rep_PDFToCreate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rep_PDFCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rep_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rep_Type)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rep_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rep_Lot_Id)
+                <script>
+                    var link = item.Rep_Lot_Id;
+
+                </script>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rep_PDFToCreate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rep_PDFCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rep_Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rep_Type)
+            </td>
+
+
+            <td>
+                <input type="checkbox" name="pdf" value="">
+                <script>
+                    var link = '"' + item.Rep_Lot_Id + ".pdf" + '"'; //creo il percorso del pdf come "nome_file.pdf"
+                    document.getElementByName("pdf").value = link; // assegno come valore il percorso del pdf
+                </script>
+            </td>
+
+        </tr>
+        
+    }
+
+</table>
+
+
+<script>
+    function OpenPdf() {
+        //cerco tutte le checkbox e ottengo il link da quella che trovo spuntata
+        var cbox = document.getElementsByName("pdf");
+        for (var i = 0; i < cbox.length; i++)
+            if (cbox[i].type == "checkbox")
+                if (cbox[i].checked) {
+                    var pdf_link = cbox[i].value;
+                    break
+                }
+                    
+                    
+
+        window.open(pdf_link, '_blank') //apro il pdf 
+    }
+</script>
+<button onclick="OpenPdf()" type="button" id="submit">
+
+    report pdf
+</button>
