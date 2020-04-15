@@ -18,6 +18,12 @@ namespace Database_reader_V2
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Report", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+               name: "Pdf",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Report", action = "Pdf_view", id = UrlParameter.Optional }
+       );
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<Database_reader_V2.Models.Report>
 
 
+
+<!-- css relativo alla tabella -->
 <style>
     table {
         font-family: arial, sans-serif;
@@ -19,8 +21,58 @@
     }
 </style>
 
+<!-- css relativo alla textbox -->
+<style>
+    input[type=text] {
+        position: fixed;
+        width: 150px;
+        border: 2px solid #aaa;
+        border-radius: 4px;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+        transition: .3s;
+        left: 500px;
+        top: 5px;
+    }
+
+        input[type=text]:focus {
+            border-color: dodgerBlue;
+            box-shadow: 0 0 8px 0 dodgerBlue;
+        }
+</style>
+
+<style>
+    #Search {
+        text-align: center;
+    }
+
+    #bloc1, #bloc2 {
+        display: inline;
+        vertical-align: middle;
+    }
+</style>
+
+<div id="Search">
+    <div id="bloc1">
+        <label for="Id_filter" style="position: absolute; left: 400px;">Lot Id Filter:</label>
+    </div>
+
+    <div id="bloc1"> <input type="text" id="Id_filter" name="Id_filter"></div>
+
+
+</div>
+<button type="button" id="search" style="position: absolute; left:650px; top:5px; height:20px;"> Search</button>
+<!-- filtri -->
+<label for="Time_filter" style="position: absolute; left: 20px; top:10px">Time Filter</label><br>
+<input type="radio" name="color" value="all"> All <br>
+<input type="radio" name="color" value="last week"> Last week <br>
+<input type="radio" name="color" value="date Seletion">Date Seletion <br>
 <table class="table">
     <tr>
+        <th>
+            Select
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Rep_Id)
         </th>
@@ -46,14 +98,17 @@
     {
         <tr>
             <td>
+                <input type="checkbox" name="pdf" value="">
+                <script>
+                    var link = '"' + item.Rep_Lot_Id + ".pdf" + '"'; //creo il percorso del pdf come "nome_file.pdf"
+                    document.getElementByName("pdf").value = link; // assegno come valore il percorso del pdf
+                </script>
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Rep_Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rep_Lot_Id)
-                <script>
-                    var link = item.Rep_Lot_Id;
-
-                </script>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rep_PDFToCreate)
@@ -68,17 +123,8 @@
                 @Html.DisplayFor(modelItem => item.Rep_Type)
             </td>
 
-
-            <td>
-                <input type="checkbox" name="pdf" value="">
-                <script>
-                    var link = '"' + item.Rep_Lot_Id + ".pdf" + '"'; //creo il percorso del pdf come "nome_file.pdf"
-                    document.getElementByName("pdf").value = link; // assegno come valore il percorso del pdf
-                </script>
-            </td>
-
         </tr>
-        
+
     }
 
 </table>
@@ -94,13 +140,46 @@
                     var pdf_link = cbox[i].value;
                     break
                 }
-                    
-                    
 
-        window.open(pdf_link, '_blank') //apro il pdf 
+
+
+        window.open(pdf_link, '_blank') //apro il pdf
     }
 </script>
 <button onclick="OpenPdf()" type="button" id="submit">
 
     report pdf
 </button>
+
+
+
+
+
+<!-- parte relativa alla lettura pdf -->
+
+    <canvas id=" "my_canvas"></canvas>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.3.200/build/pdf.min.js"></script>
+    </header>
+    <script>
+        pdfjsLib.getDocument('../Pdf/1930201.pdf');
+        doc.getPage(1).then(page => {
+            var mycanvas = document.getElementsById("pdf_canvas");
+            var context = mycanvas.getContext("2d");
+
+            var viewport = page.getViewPort(1);
+            mycanvas.width = viewport.width;
+            mycanvas.height = viewport.height;
+
+            page.render({
+                canvasContext: context,
+                viewport
+            });
+            ;
+    </script>
+
+    
+   
+
+
+
