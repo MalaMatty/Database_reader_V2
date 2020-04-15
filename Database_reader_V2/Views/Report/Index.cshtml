@@ -101,7 +101,7 @@
                 <input type="checkbox" name="pdf" value="">
                 <script>
                     var link = '"' + item.Rep_Lot_Id + ".pdf" + '"'; //creo il percorso del pdf come "nome_file.pdf"
-                    document.getElementByName("pdf").value = link; // assegno come valore il percorso del pdf
+                   
                 </script>
             </td>
             <td>
@@ -157,26 +157,7 @@
 
 <!-- parte relativa alla lettura pdf -->
 
-    <canvas id=" "my_canvas"></canvas>
-    <header>
-        <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.3.200/build/pdf.min.js"></script>
-    </header>
-    <script>
-        pdfjsLib.getDocument('../Pdf/1930201.pdf');
-        doc.getPage(1).then(page => {
-            var mycanvas = document.getElementsById("pdf_canvas");
-            var context = mycanvas.getContext("2d");
-
-            var viewport = page.getViewPort(1);
-            mycanvas.width = viewport.width;
-            mycanvas.height = viewport.height;
-
-            page.render({
-                canvasContext: context,
-                viewport
-            });
-            ;
-    </script>
+  
 
     
    

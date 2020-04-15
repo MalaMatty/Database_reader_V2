@@ -92,7 +92,14 @@
     <Content Include="Pdf\1930201.pdf" />
     <Content Include="Pdf\1930201_Cleaning.pdf" />
     <Content Include="Pdf\11151LOT01.pdf" />
+    <Content Include="Pdf\Js\pdf.js.map" />
+    <Content Include="Pdf\Js\pdf.worker.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Pdf\Js\main.js" />
+    <Content Include="Pdf\Js\pdf.js" />
+    <Content Include="Pdf\Js\pdf.worker.js" />
+    <Content Include="Pdf\Pdf_view.html" />
+    <Content Include="Pdf\style.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
