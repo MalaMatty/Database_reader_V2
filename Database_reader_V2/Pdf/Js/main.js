@@ -1,4 +1,4 @@
-﻿const url = '../Pdf/1930201.pdf';
+﻿const url = 'Turing.pdf';
 
 let pdfDoc = null,
     pageNum = 1,

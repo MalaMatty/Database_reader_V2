@@ -94,6 +94,7 @@
     <Content Include="Pdf\11151LOT01.pdf" />
     <Content Include="Pdf\Js\pdf.js.map" />
     <Content Include="Pdf\Js\pdf.worker.js.map" />
+    <Content Include="Pdf\Turing.pdf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Pdf\Js\main.js" />
     <Content Include="Pdf\Js\pdf.js" />
