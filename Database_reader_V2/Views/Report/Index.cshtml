@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Database_reader_V2.Models.Report>
 
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+<script src="~/Pdf/Js/main.js"></script>
 
 
 <!-- css relativo alla tabella -->
@@ -100,8 +102,7 @@
             <td>
                 <input type="checkbox" name="pdf" value="">
                 <script>
-                    var link = '"' + item.Rep_Lot_Id + ".pdf" + '"'; //creo il percorso del pdf come "nome_file.pdf"
-                   
+                    var link = '"' + item.Rep_Lot_Id + ".pdf" + '"'; //creo il percorso del pdf come "nome_file.pdf" PARTE DA METTERE A POSTO
                 </script>
             </td>
             <td>
@@ -146,21 +147,36 @@
         window.open(pdf_link, '_blank') //apro il pdf
     }
 </script>
+<!-- pulsante pdf-->
 <button onclick="OpenPdf()" type="button" id="submit">
 
     report pdf
 </button>
 
+<!-- parte relativa alla visone del pdf tramite un iframe-->
+<br>
+<div>
+    <iframe src="~/Pdf/Pdf_view.html" height="700" width="500" style="position:absolute; left :300px"></iframe>
+
+    <button class="btn" id="prev-page">
+        <i class="fas fa-arrow-circle-left"></i> Prev Page
+    </button>
+    <button class="btn" id="next-page">
+        Next Page <i class="fas fa-arrow-circle-right"></i>
+    </button>
+</div>
 
 
 
 
-<!-- parte relativa alla lettura pdf -->
 
-  
 
-    
-   
+
+
+
+
+
+
 
 
 

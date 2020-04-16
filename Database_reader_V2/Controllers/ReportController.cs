@@ -88,5 +88,11 @@ namespace Database_reader_V2.Controllers
                 return View();
             }
         }
+        public ActionResult Search(int id)
+        {
+            ReportDBHandle dbhandle = new ReportDBHandle();
+            ModelState.Clear();
+            return View(dbhandle.ViewLotId());
+        }
     }
 }
