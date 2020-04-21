@@ -92,6 +92,7 @@
     <Content Include="Pdf\1930201.pdf" />
     <Content Include="Pdf\1930201_Cleaning.pdf" />
     <Content Include="Pdf\11151LOT01.pdf" />
+    <Content Include="Pdf\Js\NavEx.js" />
     <Content Include="Pdf\Js\pdf.js.map" />
     <Content Include="Pdf\Js\pdf.worker.js.map" />
     <Content Include="Pdf\Turing.pdf" />
