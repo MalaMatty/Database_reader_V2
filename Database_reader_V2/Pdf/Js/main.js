@@ -1,4 +1,6 @@
-﻿const url = 'Turing.pdf';
+﻿const url = 'Turing.pdf'; //prova
+
+//const url localStorage.getItem("Pdf_link")      --->una volta messo a posto uso questo per ottenere il link
 
 let pdfDoc = null,
     pageNum = 1,

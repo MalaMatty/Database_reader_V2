@@ -53,6 +53,7 @@
         display: inline;
         vertical-align: middle;
     }
+
     #filter {
         display: inline-block;
     }
@@ -103,6 +104,8 @@
 
     </tr>
 
+
+    @{int i = 1; } <!--contatore per id-->
     @foreach (var item in Model)
     {
         <tr>
@@ -113,7 +116,7 @@
                 @Html.DisplayFor(modelItem => item.Rep_Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rep_Lot_Id)
+                @Html.DisplayFor(modelItem => item.Rep_Lot_Id, new { id = "RepId" + i }) <!--forzo creazione di un id-->
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rep_PDFToCreate)
@@ -129,20 +132,26 @@
             </td>
 
         </tr>
+        i += 1;
 
     }
 
 </table>
 
-<label id="prova">Prova: </label>
+<label id="prova">Prova: </label> <!--label di prova per visualizzare se ottengo il rep id -->
+
 <script>
     function OpenPdf() {
 
-        var checkedCheckbox = $("pdf_check:checked"); // considero la checkbox spuntata
-        var repLotId = $(checkedCheckbox).parent().next().next().html(); // uso la funzione travel per adare agli elementi vicino e trovare il valore di lot id
-        document.getElementById('prova').innerText = repLotId; //Correggere e capire perchè undefined
+         var checkedCheckbox = $("pdf_check:checked"); // considero la checkbox spuntata
+         var repLotId = $(checkedCheckbox).parent().next().next().html(); // uso la funzione travel per adare agli elementi vicino e trovare il valore di lot id
 
+         //var  repLotId = $.trim($("#RepId2").html()) funzione di prova per ottenere il valore dall pagina
+         document.getElementById('prova').innerHTML = repLotId; //riga di prova per vedere il valore di repLotId in una label, il problema è che è undefined
 
+        //var pdf_link= variabile del rep lot id +".pdf";
+        //window.open(pdf_link, '_blank') //apro il pdf in pagina vuota per prova
+        localStorage.setItem("Pdf_link", pdf_link); //salvo variabile per usarla nell'altra pagina
     }
 </script>
 <br>
@@ -151,6 +160,7 @@
     report pdf
 </button>
 <br>
+
 <!-- parte relativa alla visone del pdf tramite un iframe-->
 
 <div>
