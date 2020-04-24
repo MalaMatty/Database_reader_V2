@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Database_reader_V2.Models.Report>
 
-@*<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>*@
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
 
@@ -26,7 +27,7 @@
 <!-- css relativo alla textbox -->
 <style>
     input[type=text] {
-        position: fixed;
+        position: absolute;
         width: 150px;
         border: 2px solid #aaa;
         border-radius: 4px;
@@ -34,7 +35,6 @@
         padding: 8px;
         box-sizing: border-box;
         transition: .3s;
-        left: 500px;
         top: 5px;
     }
 
@@ -53,23 +53,31 @@
         display: inline;
         vertical-align: middle;
     }
+
+    #filter {
+        display: inline-block;
+    }
 </style>
 
 <div id="Search">
     <div id="bloc1">
-        <label for="Id_filter" style="position: absolute; left: 400px;">Lot Id Filter:</label>
+        <label for="Id_filter">Lot Id Filter:</label>
     </div>
 
     <div id="bloc1"> <input type="text" id="Id_filter" name="Id_filter"></div>
 
 
 </div>
-<button type="button" id="search" style="position: absolute; left:650px; top:5px; height:20px;"> Search</button>
+<button type="button" id="search" style="position: absolute; left:1050px; top:5px; height:20px;"> Search</button>
+
 <!-- filtri -->
-<label for="Time_filter" style="position: absolute; left: 20px; top:10px">Time Filter</label><br>
-<input type="radio" name="color" value="all"> All <br>
-<input type="radio" name="color" value="last week"> Last week <br>
-<input type="radio" name="color" value="date Seletion">Date Seletion <br>
+<div id="filter">
+    <label for="Time_filter" style="position: absolute; left: 20px; top:10px">Time Filter</label><br>
+    <input type="radio" name="color" value="all"> All <br>
+    <input type="radio" name="color" value="last week"> Last week <br>
+    <input type="radio" name="color" value="date Seletion">Date Seletion <br>
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -93,23 +101,22 @@
         <th>
             @Html.DisplayNameFor(model => model.Rep_Type)
         </th>
-        <th></th>
+
     </tr>
 
+
+    @{int i = 1; } <!--contatore per id-->
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                <input type="checkbox" name="pdf" value="">
-                <script>
-                    var link = '"' + item.Rep_Lot_Id + ".pdf" + '"'; //creo il percorso del pdf come "nome_file.pdf" PARTE DA METTERE A POSTO
-                </script>
+                @Html.CheckBox("pdf_check", false)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rep_Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rep_Lot_Id)
+                @Html.DisplayFor(modelItem => item.Rep_Lot_Id, new { id = "RepId" + i }) <!--forzo creazione di un id-->
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rep_PDFToCreate)
@@ -125,67 +132,40 @@
             </td>
 
         </tr>
+        i += 1;
 
     }
 
 </table>
 
+<label id="prova">Prova: </label> <!--label di prova per visualizzare se ottengo il rep id -->
 
 <script>
     function OpenPdf() {
-        //cerco tutte le checkbox e ottengo il link da quella che trovo spuntata
-        var cbox = document.getElementsByName("pdf");
-        for (var i = 0; i < cbox.length; i++)
-            if (cbox[i].type == "checkbox")
-                if (cbox[i].checked) {
-                    var pdf_link = cbox[i].value;
-                    break
-                }
 
+         var checkedCheckbox = $("pdf_check:checked"); // considero la checkbox spuntata
+         var repLotId = $(checkedCheckbox).parent().next().next().html(); // uso la funzione travel per adare agli elementi vicino e trovare il valore di lot id
 
+         //var  repLotId = $.trim($("#RepId2").html()) funzione di prova per ottenere il valore dall pagina
+         document.getElementById('prova').innerHTML = repLotId; //riga di prova per vedere il valore di repLotId in una label, il problema è che è undefined
 
-        window.open(pdf_link, '_blank') //apro il pdf
+        //var pdf_link= variabile del rep lot id +".pdf";
+        //window.open(pdf_link, '_blank') //apro il pdf in pagina vuota per prova
+        localStorage.setItem("Pdf_link", pdf_link); //salvo variabile per usarla nell'altra pagina
     }
 </script>
+<br>
 <!-- pulsante pdf-->
-<button onclick="OpenPdf()" type="button" id="submit">
-
+<button onclick="OpenPdf()" type="button" id="submit" style="position: absolute; text-align:center ">
     report pdf
 </button>
+<br>
 
 <!-- parte relativa alla visone del pdf tramite un iframe-->
-@*<br>
-    <div>
-        <iframe src="~/Pdf/Pdf_view.html" height="700" width="500" style="position:absolute; left :300px"></iframe>
-
-        <button class="btn" id="prev-page">
-            <i class="fas fa-arrow-circle-left"></i> Prev Page
-        </button>
-        <button class="btn" id="next-page">
-            Next Page <i class="fas fa-arrow-circle-right"></i>
-        </button>
-    </div>*@
-<style>
-    #the-canvas {
-        border: 1px solid black;
-        direction: ltr;
-    }
-</style>
-
-<script src="~/Pdf/Js/pdf.js"></script>
-@*<script src="~/Pdf/Js/main.js"></script>*@
-<script src="~/Pdf/Js/NavEx.js"></script>
-<h1>PDF.js Previous/Next example</h1>
 
 <div>
-    <button id="prev">Previous</button>
-    <button id="next">Next</button>
-    &nbsp; &nbsp;
-    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+    <iframe src="~/Pdf/Pdf_view.html" height="700" width="800" style="position:absolute; left :300px"></iframe>
 </div>
-
-<canvas id="the-canvas"></canvas>
-
 
 
 
