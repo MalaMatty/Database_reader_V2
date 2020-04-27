@@ -5,7 +5,10 @@
 let pdfDoc = null,
     pageNum = 1,
     pageIsRendering = false,
+    end=false,
     pageNumIsPending = null;
+
+//sessionStorage.setItem('end_pages', end); ---non aggiorna status
 
 const scale = 1.5,
     canvas = document.querySelector('#pdf-render'),
@@ -66,6 +69,9 @@ const showNextPage = () => {
     }
     pageNum++;
     queueRenderPage(pageNum);
+    if (pageNum == pdfDoc.numPages) {
+        end = true;
+    }
 };
 
 // Get Document
@@ -91,3 +97,13 @@ pdfjsLib
 // Button Events
 document.querySelector('#prev-page').addEventListener('click', showPrevPage);
 document.querySelector('#next-page').addEventListener('click', showNextPage);
+
+
+
+//parte relativa al controllo pagina
+
+function verifica() {
+    sessionStorage.setItem('end_pages', end);
+    document.querySelector('#end').textContent = end;
+}
+document.querySelector('#esegui').addEventListener('click', verifica);
