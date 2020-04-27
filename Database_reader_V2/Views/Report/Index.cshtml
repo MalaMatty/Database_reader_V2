@@ -143,11 +143,11 @@
 <script>
     function OpenPdf() {
 
-         var checkedCheckbox = $("pdf_check:checked"); // considero la checkbox spuntata
-         var repLotId = $(checkedCheckbox).parent().next().next().html(); // uso la funzione travel per adare agli elementi vicino e trovare il valore di lot id
+        var checkedCheckbox = $("pdf_check:checked"); // considero la checkbox spuntata
+        var repLotId = $(checkedCheckbox).parent().next().next().html(); // uso la funzione travel per adare agli elementi vicino e trovare il valore di lot id
 
-         //var  repLotId = $.trim($("#RepId2").html()) funzione di prova per ottenere il valore dall pagina
-         document.getElementById('prova').innerHTML = repLotId; //riga di prova per vedere il valore di repLotId in una label, il problema è che è undefined
+        //var  repLotId = $.trim($("#RepId2").html()) funzione di prova per ottenere il valore dall pagina
+        document.getElementById('prova').innerHTML = repLotId; //riga di prova per vedere il valore di repLotId in una label, il problema è che è undefined
 
         //var pdf_link= variabile del rep lot id +".pdf";
         //window.open(pdf_link, '_blank') //apro il pdf in pagina vuota per prova
@@ -167,6 +167,31 @@
     <iframe src="~/Pdf/Pdf_view.html" height="700" width="800" style="position:absolute; left :300px"></iframe>
 </div>
 
+
+<!-- parte relativa ai due pulsanti da abilitare-->
+<button type="button" id="validate" style="position: absolute; left:1250px; top:500px; height:20px;"> Validate </button>
+<button type="button" id="review" style="position: absolute; left:1250px; top:530px; height:20px;"> Review</button>
+<label id="is" style="position: absolute; left:1250px; top:560px; height:20px;">Is enabled?</label>
+
+<script>
+    document.getElementById("validate").disabled = true;
+    document.getElementById("review").disabled = true;
+</script>
+
+<script>
+    function check() {
+        var end = sessionStorage.getItem("end_pages");
+
+        if (end) {
+            document.getElementById("validate").disabled = false;
+            document.getElementById("review").disabled = false;
+        }
+        alert("I am an alert box!"+end);
+    }
+   
+
+</script>
+<button type="button" id="ck" onclick="check()"style=" position: absolute; left:1250px; top:590px; height:20px;"> Check</button>
 
 
 
