@@ -5,6 +5,7 @@
 
 
 
+
 <!-- css relativo alla tabella -->
 <style>
     table {
@@ -168,7 +169,7 @@
 </div>
 
 
-<!-- parte relativa ai due pulsanti da abilitare-->
+<!-- parte relativa ai due pulsanti da abilitare, poi bisogna creare le loro relative funzioni-->
 <button type="button" id="validate" style="position: absolute; left:1250px; top:500px; height:20px;"> Validate </button>
 <button type="button" id="review" style="position: absolute; left:1250px; top:530px; height:20px;"> Review</button>
 <label id="is" style="position: absolute; left:1250px; top:560px; height:20px;">Is enabled?</label>
@@ -178,7 +179,7 @@
     document.getElementById("review").disabled = true;
 </script>
 
-<script>
+<!-- <script>
     function check() {
         var end = sessionStorage.getItem("end_pages");
 
@@ -186,16 +187,35 @@
             document.getElementById("validate").disabled = false;
             document.getElementById("review").disabled = false;
         }
-        alert("I am an alert box!"+end);
+        alert("I am an alert box!" + end);
     }
-   
 
+
+</script> parte relativa al trasferimento variabili da una pagina all'altra,tengo come esempio attualmente-->
+<button type="button" id="ck" onclick="check()" style=" position: absolute; left:1250px; top:590px; height:20px;"> Check</button>
+
+
+<script>
+    if (end) {
+        document.getElementById("validate").disabled = false;
+        document.getElementById("review").disabled = false;
+    }
 </script>
-<button type="button" id="ck" onclick="check()"style=" position: absolute; left:1250px; top:590px; height:20px;"> Check</button>
 
+<!--
+<script>
+    function setUserID(end) {
+        $('#end').val(end)
+            .trigger('change');
+    }
+</script>
 
-
-
+<script>
+    $('#userid').change(function () {
+        document.getElementById("validate").disabled = true;
+        document.getElementById("review").disabled = true;
+    })
+</script> parte in jquery che va eliminata ma può servire per la barra di ricerca -->
 
 
 
