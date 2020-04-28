@@ -71,6 +71,10 @@ const showNextPage = () => {
     queueRenderPage(pageNum);
     if (pageNum == pdfDoc.numPages) {
         end = true;
+        parent.document.getElementById("validate").disabled = false;
+        parent.document.getElementById("review").disabled = false; //a quanto pare si può risolvere la cosa senza ajax ma utilizzando la funziona parent di hmtl
+        //document.getElementById("validate").disabled = false;
+       // document.getElementById("review").disabled = false;
     }
 };
 
