@@ -25,7 +25,7 @@
     }
 </style>
 
-<!-- css relativo alla textbox -->
+<!-- css relativo alla textbox
 <style>
     input[type=text] {
         position: absolute;
@@ -43,7 +43,7 @@
             border-color: dodgerBlue;
             box-shadow: 0 0 8px 0 dodgerBlue;
         }
-</style>
+</style>-->
 
 <style>
     #Search {
@@ -59,8 +59,8 @@
         display: inline-block;
     }
 </style>
-
-<div id="Search">
+<!--
+/<div id="Search">
     <div id="bloc1">
         <label for="Id_filter">Lot Id Filter:</label>
     </div>
@@ -70,76 +70,88 @@
 
 </div>
 <button type="button" id="search" style="position: absolute; left:1050px; top:5px; height:20px;"> Search</button>
-
-<!-- filtri -->
+-->
+<!-- filtri vecchi
 <div id="filter">
     <label for="Time_filter" style="position: absolute; left: 20px; top:10px">Time Filter</label><br>
     <input type="radio" name="color" value="all"> All <br>
     <input type="radio" name="color" value="last week"> Last week <br>
     <input type="radio" name="color" value="date Seletion">Date Seletion <br>
-</div>
-
-<table class="table">
-    <tr>
-        <th>
-            Select
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rep_Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rep_Lot_Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rep_PDFToCreate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rep_PDFCreated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rep_Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rep_Type)
-        </th>
-
-    </tr>
-
-
-    @{int i = 1; } <!--contatore per id-->
-    @foreach (var item in Model)
+</div>-->
+<!--filtri fatti con altro meotodo-->
+<center>
+    @using (Html.BeginForm("Index", "Report", FormMethod.Get))
     {
-        <tr>
-            <td>
-                @Html.CheckBox("pdf_check", false)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rep_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rep_Lot_Id, new { id = "RepId" + i }) <!--forzo creazione di un id-->
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rep_PDFToCreate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rep_PDFCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rep_Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rep_Type)
-            </td>
+        @Html.RadioButton("searchString", "11151LOT01")<span>All</span>
+        @Html.RadioButton("searchString", "last week")<span>Last week</span>
+        @Html.RadioButton("searchString", "last week")<span>Date Selection</span>
+        @Html.TextBox("searchString")<span>Search by name</span>
+        <input type="submit" value="Search" />
 
-        </tr>
-        i += 1;
 
+        <table class="table">
+
+            <tr>
+                <th>
+                    Select
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rep_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rep_Lot_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rep_PDFToCreate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rep_PDFCreated)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rep_Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rep_Type)
+                </th>
+
+            </tr>
+
+
+            @{int i = 1; } <!--contatore per id-->
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.CheckBox("pdf_check", false)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rep_Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rep_Lot_Id, new { id = "RepId" + i }) <!--forzo creazione di un id-->
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rep_PDFToCreate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rep_PDFCreated)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rep_Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rep_Type)
+                    </td>
+
+                </tr>
+                i += 1;
+
+            }
+
+        </table>
     }
-
-</table>
-
-<label id="prova">Prova: </label> <!--label di prova per visualizzare se ottengo il rep id -->
+</center>
+<!--<label id="prova">Prova: </label> label di prova per visualizzare se ottengo il rep id -->
 
 <script>
     function OpenPdf() {
@@ -156,12 +168,11 @@
     }
 </script>
 <br>
-<!-- pulsante pdf-->
+<!-- pulsante pdf
 <button onclick="OpenPdf()" type="button" id="submit" style="position: absolute; text-align:center ">
     report pdf
 </button>
-<br>
-
+<br>-->
 <!-- parte relativa alla visone del pdf tramite un iframe-->
 
 <div>
@@ -216,13 +227,3 @@
         document.getElementById("review").disabled = true;
     })
 </script> parte in jquery che va eliminata ma può servire per la barra di ricerca -->
-
-
-
-
-
-
-
-
-
-
