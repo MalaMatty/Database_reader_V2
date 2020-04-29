@@ -24,7 +24,11 @@ namespace Database_reader_V2.Controllers
             }
             else
             {
-                sqlquery = "select * from [dbo].[RPT_Lots_Report] where Rep_Lot_ID like '" + searchString + "'";
+                //sqlquery = "select * from [dbo].[RPT_Lots_Report] where Rep_Lot_ID like '" + searchString + "'";
+                sqlquery = "select [dbo].[RPT_Lots_Report].[Rep_Lot_Id],[dbo].[RPT_Lots_Report].[Rep_Id],[dbo].[RPT_Lots_Report].[Rep_PDFToCreate],[dbo].[RPT_Lots_Report].[Rep_PDFCreated],[dbo].[RPT_Lots_Report].[Rep_Status],[dbo].[RPT_Lots_Report].[Rep_Type]" +
+                    " from [dbo].[RPT_Lots_Report],[dbo].[RPT_Lots_Info]" +
+
+                    " where [dbo].[RPT_Lots_Info].[Lot_Stop] ='" + searchString + "'";
             }
             
             SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
