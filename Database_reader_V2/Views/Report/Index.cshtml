@@ -82,9 +82,9 @@
 <center>
     @using (Html.BeginForm("Index", "Report", FormMethod.Get))
     {
-        @Html.RadioButton("searchString", "11151LOT01")<span>All</span>
-        @Html.RadioButton("searchString", "last week")<span>Last week</span>
-        @Html.RadioButton("searchString", "last week")<span>Date Selection</span>
+        @Html.RadioButton("search_radio", "all")<span>All</span>
+        @Html.RadioButton("search_radio", "last_week")<span>Last week</span>
+        @Html.RadioButton("search_radio", "date_selecetion")<span>Date Selection</span>
         @Html.TextBox("searchString")<span>Search by name</span>
         <input type="submit" value="Search" />
 
