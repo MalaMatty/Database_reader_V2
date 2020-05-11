@@ -84,7 +84,7 @@
     {
         @Html.RadioButton("search_radio", "all")<span>All</span>
         @Html.RadioButton("search_radio", "last_week")<span>Last week</span>
-        @Html.RadioButton("search_radio", "date_selecetion")<span>Date Selection</span>
+        @Html.RadioButton("search_radio", "date_selection")<span>Date Selection</span>
         @Html.TextBox("searchString")<span>Search by name</span>
         <input type="submit" value="Search" />
 
@@ -181,7 +181,7 @@
 
 
 <!-- parte relativa ai due pulsanti da abilitare, poi bisogna creare le loro relative funzioni-->
-<button type="button" id="validate" style="position: absolute; left:1250px; top:500px; height:20px;"> Validate </button>
+<button type="button" onclick="location.href='/Report/Login.html' "id="validate" style="position: absolute; left:1250px; top:500px; height:20px;"> Validate </button>
 <button type="button" id="review" style="position: absolute; left:1250px; top:530px; height:20px;"> Review</button>
 <label id="is" style="position: absolute; left:1250px; top:560px; height:20px;">Is enabled?</label>
 
@@ -213,6 +213,7 @@
     }
 </script>
 
+<button type="button" id="ad" onclick="btnLogin_Click" style=" position: absolute; left:1250px; top:650px; height:20px;"> Test AD</button>
 <!--
 <script>
     function setUserID(end) {

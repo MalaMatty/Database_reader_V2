@@ -22,7 +22,7 @@ namespace Database_reader_V2.Controllers
             {
                  sqlquery = "select * from [dbo].[RPT_Lots_Report]";
             }
-            else if(searchString!=null )
+            else if(searchString!=null && search_radio==null)
             {
                 sqlquery = "select * from [dbo].[RPT_Lots_Report] where Rep_Lot_ID like '" + searchString + "'";
                /* sqlquery = "select [dbo].[RPT_Lots_Report].[Rep_Lot_Id],[dbo].[RPT_Lots_Report].[Rep_Id],[dbo].[RPT_Lots_Report].[Rep_PDFToCreate],[dbo].[RPT_Lots_Report].[Rep_PDFCreated],[dbo].[RPT_Lots_Report].[Rep_Status],[dbo].[RPT_Lots_Report].[Rep_Type]" +
@@ -32,17 +32,21 @@ namespace Database_reader_V2.Controllers
             }
             else if(search_radio == "last_week")
             {
-                sqlquery = "select [dbo].[RPT_Lots_Report].[Rep_Lot_Id],[dbo].[RPT_Lots_Report].[Rep_Id],[dbo].[RPT_Lots_Report].[Rep_PDFToCreate],[dbo].[RPT_Lots_Report].[Rep_PDFCreated],[dbo].[RPT_Lots_Report].[Rep_Status],[dbo].[RPT_Lots_Report].[Rep_Type]" +
+                sqlquery = "select [dbo].[RPT_Lots_Report].[Rep_Lot_Id],[dbo].[RPT_Lots_Report].[Rep_Id],[dbo].[RPT_Lots_Report].[Rep_PDFToCreate],[dbo].[RPT_Lots_Report].[Rep_PDFCreated],[dbo].[RPT_Lots_Report].[Rep_Status],[dbo].[RPT_Lots_Report].[Rep_Type],[dbo].[RPT_Lots_Info].[Lot_Stop] as Stop_date" +
                     " from [dbo].[RPT_Lots_Report],[dbo].[RPT_Lots_Info]" +
 
-                    "CreatedDate >= DATEADD(day,-7, GETDATE())";
+                    "where [dbo].[RPT_Lots_Info].[Lot_Stop] >= DATEADD(day,-7, GETDATE())";
             }
-            else if(search_radio == "date_selecetion")
+            else if(search_radio == "date_selection" && searchString!=null)
             {
                 sqlquery = "select [dbo].[RPT_Lots_Report].[Rep_Lot_Id],[dbo].[RPT_Lots_Report].[Rep_Id],[dbo].[RPT_Lots_Report].[Rep_PDFToCreate],[dbo].[RPT_Lots_Report].[Rep_PDFCreated],[dbo].[RPT_Lots_Report].[Rep_Status],[dbo].[RPT_Lots_Report].[Rep_Type]" +
                     " from [dbo].[RPT_Lots_Report],[dbo].[RPT_Lots_Info]" +
 
                     " where [dbo].[RPT_Lots_Info].[Lot_Stop] ='" + searchString + "'";
+            }
+            else
+            {
+                sqlquery = "select * from [dbo].[RPT_Lots_Report]"; //modificare
             }
 
 
