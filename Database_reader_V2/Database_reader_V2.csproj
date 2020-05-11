@@ -44,6 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -53,6 +54,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -88,7 +90,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Active_directory\User.html" />
     <Content Include="Global.asax" />
+    <Content Include="Login\jquery.ml-keyboard.css" />
+    <Content Include="Login\jquery.ml-keyboard.min.js" />
     <Content Include="Pdf\1930201.pdf" />
     <Content Include="Pdf\1930201_Cleaning.pdf" />
     <Content Include="Pdf\11151LOT01.pdf" />
@@ -96,6 +101,7 @@
     <Content Include="Pdf\Js\pdf.js.map" />
     <Content Include="Pdf\Js\pdf.worker.js.map" />
     <Content Include="Pdf\Turing.pdf" />
+    <Content Include="Active_directory\ViewPage1.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Pdf\Js\main.js" />
     <Content Include="Pdf\Js\pdf.js" />
@@ -109,11 +115,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Login\Login.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Active_directory\AD.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Global.asax.cs">
