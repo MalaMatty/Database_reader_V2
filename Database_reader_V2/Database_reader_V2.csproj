@@ -92,6 +92,8 @@
   <ItemGroup>
     <Content Include="Active_directory\User.html" />
     <Content Include="Global.asax" />
+    <Content Include="Login\index.css" />
+    <Content Include="Login\index.js" />
     <Content Include="Login\jquery.ml-keyboard.css" />
     <Content Include="Login\jquery.ml-keyboard.min.js" />
     <Content Include="Pdf\1930201.pdf" />

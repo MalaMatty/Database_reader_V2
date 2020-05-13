@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+    <link rel="stylesheet" href="index.css">
 
 
 
@@ -26,7 +27,11 @@
             margin: 8px 0;
             display: inline-block;
             border: 1px solid #ccc;
-            box-sizing: border-box;
+            
+        }
+        #inner {
+            width: 200%;
+            margin: 0 auto;
         }
 
         button {
@@ -68,7 +73,7 @@
             padding-top: 16px;
         }
 
-        
+
         @media screen and (max-width: 300px) {
             span.psw {
                 display: block;
@@ -85,28 +90,126 @@
     <form action="/action_page.php" method="post">
         <!--mettere nome della pagina dove elaborare dati-->
 
-        <script src="jquery.ml-keyboard.min.js"></script>
+
 
 
         <div class="container">
             <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" id="uname" name="uname" required>
-
+            <!--<input type="text" placeholder="Enter Username" id="uname" name="uname" required>-->
+            <input class="user-input" placeholder="Enter Username" id="uname" name="uname" required onfocus="user_key(this)" />
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
+            <input class="psw-input" placeholder="Enter Password" id="psw" name="psw" required  onfocus="psw_key(this)"/>
+            <!--<input type="password" placeholder="Enter Password" id="psw" name="psw" required>-->
+
+        </div>
+       
+        <div class="container">
+            <button type="submit">Submit</button>
 
         </div>
 
-        <div class="container" >
-            <button type="submit" >Submit</button>
-
-        </div>
-
-        <script>
-            $('#uname').mlKeyboard({ layout: 'es_ES' });
-            $('#psw').mlKeyboard({ layout: 'es_ES' });
-
-        </script>
     </form>
+
+    <div class="simple-keyboard" id="inner"></div>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
+    <script>
+        //$("uname").focus(function () {
+           
+        //    let user_Keyboard = window.SimpleKeyboard.default;
+        //    let user_input = document.querySelector('.user-input');
+        //    let user_keyboard = new user_Keyboard({
+        //        onChange: function (data) { user_input.value = data; }
+        //    })
+        //});
+        //$("psw-input").focus(function () {
+        //    let psw_Keyboard = window.SimpleKeyboard.default;
+        //    let psw_input = document.querySelector('.psw-input');
+        //    let psw_keyboard = new psw_Keyboard({
+        //        onChange: function (data) { psw_input.value = data; }
+        //    })
+        //});
+
+        //parte dello shift
+        
+
+
+        //eventi focus 
+        document.getElementById("uname").addEventListener("focusout", destroy_user);
+
+        function destroy_user() {
+            user_Keyboard.destroy();
+        }
+
+        document.getElementById("psw").addEventListener("focusout", destroy_psw);
+
+        function destroy_psw() {
+            psw_Keyboard.destroy();
+        }
+
+        function user_key() {//tastiera per campo username
+            let user_Keyboard = window.SimpleKeyboard.default;
+            let user_input = document.querySelector('.user-input');
+            let myshift = '';
+            let user_keyboard = new user_Keyboard({
+                onChange: function (data) {
+                    user_input.value = data;
+                },
+                onKeyPress: function (key)
+                {
+                    //if (key === "{shift}") {
+                    //    myshift = 'shift';
+                    //    handleShift('shift');
+                    //}
+                    //else if (key === "{lock}") {
+                    //    if (myshift == 'lock') { myshift = ''; }
+                    //    else { myshift == 'lock' }
+                    //    handleShift('lock');
+                    //}
+                    //else {
+                    //    handleShift('other');
+                    //}
+                    if (key === "{shift}" || key === "{lock}") handleShift();
+                }
+                
+            })
+
+        }
+
+        function psw_key() {//tastiera per campo password
+            let psw_Keyboard = window.SimpleKeyboard.default;
+            let psw_input = document.querySelector('.psw-input');
+            let psw_keyboard = new psw_Keyboard({
+                onChange: function (data) { psw_input.value = data; }
+            })
+        }
+
+        function handleShift(caps) {
+            //let currentLayout = user_keyboard.options.layoutName;
+          
+            //let shiftToggle;
+            //if (caps == 'other') {
+            //    if (myshift == 'shift') {
+            //        myshift = '';
+            //        shiftToggle = "default";
+            //    }
+            //    else if (myshift == 'lock') { shiftToggle = "shift"; }
+            //    else { shiftToggle = "default"; } 
+            //}
+            //else {
+            //    shiftToggle = currentLayout === "default" ? "shift" : "default";
+            //}
+            //user_keyboard.setOptions({ layoutName: shiftToggle})
+            let currentLayout = user_input.options.layoutName;
+            let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+            keyboard.setOptions({
+                layoutName: shiftToggle
+            });
+        }
+    </script>
+
+   
 </body>
 </html>
