@@ -139,7 +139,8 @@
         document.getElementById("uname").addEventListener("focusout", destroy_user);
 
         function destroy_user() {
-            user_Keyboard.destroy();
+            //user_Keyboard.destroy();
+            console.log("Mi sposto");
         }
 
         document.getElementById("psw").addEventListener("focusout", destroy_psw);
@@ -153,24 +154,48 @@
             let user_input = document.querySelector('.user-input');
             let myshift = '';
             let user_keyboard = new user_Keyboard({
+                layout: {
+                    default: [
+                        "{escape} {f1} {f2} {f3} {f4} {f5} {f6} {f7} {f8} {f9} {f10} {f11} {f12}",
+                        "` 1 2 3 4 5 6 7 8 9 0 - = {backspace}",
+                        "{tab} q w e r t y u i o p [ ] \\",
+                        "{capslock} a s d f g h j k l ; ' {enter}",
+                        "{shiftleft} z x c v b n m , . / {shiftright}",
+                        "{controlleft} {altleft} {metaleft} {space} {metaright} {altright}"
+                    ],
+                    shift: [
+                        "{escape} {f1} {f2} {f3} {f4} {f5} {f6} {f7} {f8} {f9} {f10} {f11} {f12}",
+                        "~ ! @ # $ % ^ & * ( ) _ + {backspace}",
+                        "{tab} Q W E R T Y U I O P { } |",
+                        '{capslock} A S D F G H J K L : " {enter}',
+                        "{shiftleft} Z X C V B N M < > ? {shiftright}",
+                        "{controlleft} {altleft} {metaleft} {space} {metaright} {altright}"
+                    ]
+                },
+                display: {
+                    "{escape}": "esc ⎋",
+                    "{tab}": "tab ⇥",
+                    "{backspace}": "backspace ⌫",
+                    "{enter}": "enter ↵",
+                    "{capslock}": "caps lock ⇪",
+                    "{shiftleft}": "shift ⇧",
+                    "{shiftright}": "shift ⇧",
+                    "{controlleft}": "ctrl ⌃",
+                    "{controlright}": "ctrl ⌃",
+                    "{altleft}": "alt ⌥",
+                    "{altright}": "alt ⌥",
+                    "{metaleft}": "cmd ⌘",
+                    "{metaright}": "cmd ⌘"
+                },
+                
                 onChange: function (data) {
                     user_input.value = data;
                 },
                 onKeyPress: function (key)
                 {
-                    //if (key === "{shift}") {
-                    //    myshift = 'shift';
-                    //    handleShift('shift');
-                    //}
-                    //else if (key === "{lock}") {
-                    //    if (myshift == 'lock') { myshift = ''; }
-                    //    else { myshift == 'lock' }
-                    //    handleShift('lock');
-                    //}
-                    //else {
-                    //    handleShift('other');
-                    //}
-                    if (key === "{shift}" || key === "{lock}") handleShift();
+                    console.log("Button pressed", key);
+                    if (key === "{shiftleft}" || key === "{capslock}" || key === "{shiftright}" || key === "{shift}") handleShift(user_keyboard);
+
                 }
                 
             })
@@ -185,27 +210,22 @@
             })
         }
 
-        function handleShift(caps) {
-            //let currentLayout = user_keyboard.options.layoutName;
-          
-            //let shiftToggle;
-            //if (caps == 'other') {
-            //    if (myshift == 'shift') {
-            //        myshift = '';
-            //        shiftToggle = "default";
-            //    }
-            //    else if (myshift == 'lock') { shiftToggle = "shift"; }
-            //    else { shiftToggle = "default"; } 
-            //}
-            //else {
-            //    shiftToggle = currentLayout === "default" ? "shift" : "default";
-            //}
-            //user_keyboard.setOptions({ layoutName: shiftToggle})
-            let currentLayout = user_input.options.layoutName;
+        function handleShift(us_key) {
+           
+            const currentLayout = us_key.currentLayout;
             let shiftToggle = currentLayout === "default" ? "shift" : "default";
-
-            keyboard.setOptions({
+           // let shiftToggle = currentLayout;
+            console.log("stile prima: ", shiftToggle);
+            if (shiftToggle == "default") {
+                shiftToggle = "shift";
+            }
+            else if(shiftToggle!="default"){
+                shiftToggle = "default";
+            }
+            console.log("stile cambiato: ",shiftToggle);
+            us_key.setOptions({
                 layoutName: shiftToggle
+                
             });
         }
     </script>
