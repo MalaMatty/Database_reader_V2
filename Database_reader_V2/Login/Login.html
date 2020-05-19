@@ -1,14 +1,11 @@
 ﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!--jquery-->
+<script>//import Keyboard from 'simple-keyboard';</script>
 
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
     <link rel="stylesheet" href="index.css">
-
-
-
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="jquery.ml-keyboard.css" />  <!--css tastiera-->
@@ -27,8 +24,8 @@
             margin: 8px 0;
             display: inline-block;
             border: 1px solid #ccc;
-            
         }
+
         #inner {
             width: 200%;
             margin: 0 auto;
@@ -90,19 +87,16 @@
     <form action="/action_page.php" method="post">
         <!--mettere nome della pagina dove elaborare dati-->
 
-
-
-
         <div class="container">
             <label for="uname"><b>Username</b></label>
             <!--<input type="text" placeholder="Enter Username" id="uname" name="uname" required>-->
             <input class="user-input" placeholder="Enter Username" id="uname" name="uname" required onfocus="user_key(this)" />
             <label for="psw"><b>Password</b></label>
-            <input class="psw-input" placeholder="Enter Password" id="psw" name="psw" required  onfocus="psw_key(this)"/>
+            <input class="psw-input" placeholder="Enter Password" id="psw" name="psw" required onfocus="psw_key(this)" />
             <!--<input type="password" placeholder="Enter Password" id="psw" name="psw" required>-->
 
         </div>
-       
+
         <div class="container">
             <button type="submit">Submit</button>
 
@@ -110,13 +104,14 @@
 
     </form>
 
+    <input class="input" />
     <div class="simple-keyboard" id="inner"></div>
 
-   
+
     <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
     <script>
         //$("uname").focus(function () {
-           
+
         //    let user_Keyboard = window.SimpleKeyboard.default;
         //    let user_input = document.querySelector('.user-input');
         //    let user_keyboard = new user_Keyboard({
@@ -131,11 +126,10 @@
         //    })
         //});
 
-        //parte dello shift
         
 
 
-        //eventi focus 
+        //eventi focus
         document.getElementById("uname").addEventListener("focusout", destroy_user);
 
         function destroy_user() {
@@ -150,86 +144,121 @@
         }
 
         function user_key() {//tastiera per campo username
-            let user_Keyboard = window.SimpleKeyboard.default;
-            let user_input = document.querySelector('.user-input');
-            let myshift = '';
-            let user_keyboard = new user_Keyboard({
+            let Keyboard = window.SimpleKeyboard.default;
+            document.querySelector(".user-input").addEventListener("input", event => {
+                keyboard.setInput(event.target.value);
+            });
+            let keyboard = new Keyboard({
+                onChange: input => onChange(input),
+                onKeyPress: button => onKeyPress(button),
                 layout: {
                     default: [
-                        "{escape} {f1} {f2} {f3} {f4} {f5} {f6} {f7} {f8} {f9} {f10} {f11} {f12}",
-                        "` 1 2 3 4 5 6 7 8 9 0 - = {backspace}",
+                        "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
                         "{tab} q w e r t y u i o p [ ] \\",
-                        "{capslock} a s d f g h j k l ; ' {enter}",
-                        "{shiftleft} z x c v b n m , . / {shiftright}",
-                        "{controlleft} {altleft} {metaleft} {space} {metaright} {altright}"
+                        "{lock} a s d f g h j k l ; ' {enter}",
+                        "{shift} z x c v b n m , . / {shift}",
+                        ".com @ {space}"
                     ],
                     shift: [
-                        "{escape} {f1} {f2} {f3} {f4} {f5} {f6} {f7} {f8} {f9} {f10} {f11} {f12}",
-                        "~ ! @ # $ % ^ & * ( ) _ + {backspace}",
+                        "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
                         "{tab} Q W E R T Y U I O P { } |",
-                        '{capslock} A S D F G H J K L : " {enter}',
-                        "{shiftleft} Z X C V B N M < > ? {shiftright}",
-                        "{controlleft} {altleft} {metaleft} {space} {metaright} {altright}"
+                        '{lock} A S D F G H J K L : " {enter}',
+                        "{shift} Z X C V B N M < > ? {shift}",
+                        ".com @ {space}"
                     ]
-                },
-                display: {
-                    "{escape}": "esc ⎋",
-                    "{tab}": "tab ⇥",
-                    "{backspace}": "backspace ⌫",
-                    "{enter}": "enter ↵",
-                    "{capslock}": "caps lock ⇪",
-                    "{shiftleft}": "shift ⇧",
-                    "{shiftright}": "shift ⇧",
-                    "{controlleft}": "ctrl ⌃",
-                    "{controlright}": "ctrl ⌃",
-                    "{altleft}": "alt ⌥",
-                    "{altright}": "alt ⌥",
-                    "{metaleft}": "cmd ⌘",
-                    "{metaright}": "cmd ⌘"
-                },
-                
-                onChange: function (data) {
-                    user_input.value = data;
-                },
-                onKeyPress: function (key)
-                {
-                    console.log("Button pressed", key);
-                    if (key === "{shiftleft}" || key === "{capslock}" || key === "{shiftright}" || key === "{shift}") handleShift(user_keyboard);
-
                 }
-                
-            })
+            });
+
+            function onChange(input) {
+                document.querySelector(".user-input").value = input;
+                console.log("Input changed", input);
+            }
+
+            function onKeyPress(button) {
+                console.log("Button pressed", button);
+                if (button === "{shift}" || button === "{lock}") handleShift();
+            }
+
+            function handleShift() {
+                let currentLayout = keyboard.options.layoutName;
+                console.log("Layout: ", currentLayout);
+                let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+                keyboard.setOptions({
+                    layoutName: shiftToggle
+                });
+            }
 
         }
 
         function psw_key() {//tastiera per campo password
-            let psw_Keyboard = window.SimpleKeyboard.default;
-            let psw_input = document.querySelector('.psw-input');
-            let psw_keyboard = new psw_Keyboard({
-                onChange: function (data) { psw_input.value = data; }
-            })
+            
+            let Keyboard = window.SimpleKeyboard.default;
+            document.querySelector(".psw-input").addEventListener("input", event => {
+                keyboard.setInput(event.target.value);
+            });
+            let keyboard = new Keyboard({
+                onChange: input => onChange(input),
+                onKeyPress: button => onKeyPress(button),
+                layout: {
+                    default: [
+                        "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+                        "{tab} q w e r t y u i o p [ ] \\",
+                        "{lock} a s d f g h j k l ; ' {enter}",
+                        "{shift} z x c v b n m , . / {shift}",
+                        ".com @ {space}"
+                    ],
+                    shift: [
+                        "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
+                        "{tab} Q W E R T Y U I O P { } |",
+                        '{lock} A S D F G H J K L : " {enter}',
+                        "{shift} Z X C V B N M < > ? {shift}",
+                        ".com @ {space}"
+                    ]
+                }
+            });
+
+            function onChange(input) {
+                document.querySelector(".psw-input").value = input;
+                console.log("Input changed", input);
+            }
+
+            function onKeyPress(button) {
+                console.log("Button pressed", button);
+                if (button === "{shift}" || button === "{lock}") handleShift();
+            }
+
+            function handleShift() {
+                let currentLayout = keyboard.options.layoutName;
+                console.log("Layout: ", currentLayout);
+                let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+                keyboard.setOptions({
+                    layoutName: shiftToggle
+                });
+            }
         }
 
-        function handleShift(us_key) {
-           
-            const currentLayout = us_key.currentLayout;
-            let shiftToggle = currentLayout === "default" ? "shift" : "default";
-           // let shiftToggle = currentLayout;
-            console.log("stile prima: ", shiftToggle);
-            if (shiftToggle == "default") {
-                shiftToggle = "shift";
-            }
-            else {
-                shiftToggle = "default";
-            }
-            console.log("stile cambiato: ",shiftToggle);
-            us_key.setOptions({
-                layoutName: shiftToggle
-                
-            });
-        }
+                //function handleShift(us_key) {
+
+                //    const currentLayout = us_key.currentLayout;
+                //    //let shiftToggle = currentLayout === "default" ? "shift" : "default";
+                //    let shiftToggle = currentLayout;
+                //    console.log("stile prima: ", shiftToggle);
+                //    if (shiftToggle == "default" || "undefined") {
+                //        shiftToggle = "shift";
+                //    }
+                //    else {
+                //        shiftToggle = "default";
+                //    }
+                //    console.log("stile cambiato: ",shiftToggle);
+                //    us_key.setOptions({
+                //        layoutName: shiftToggle
+
+                //    });
+                //}
     </script>
 
-   
+
 </body>
 </html>
