@@ -1,14 +1,30 @@
 ﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!--jquery-->
 
+<script >//il layout principale l'ho dichiarato qua perchè non riesco a fare l'import da file
+    var layout = {
+        default: [
+            "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+            "{tab} q w e r t y u i o p [ ] \\",
+            "{lock} a s d f g h j k l ; ' {enter}",
+            "{shift} z x c v b n m , . / {shift}",
+            ".com @ {space}"
+        ],
+        shift: [
+            "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
+            "{tab} Q W E R T Y U I O P { } |",
+            '{lock} A S D F G H J K L : " {enter}',
+            "{shift} Z X C V B N M < > ? {shift}",
+            ".com @ {space}"
+        ]
+    };
+    
+</script>
+  
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
     <link rel="stylesheet" href="index.css">
-
-
-
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="jquery.ml-keyboard.css" />  <!--css tastiera-->
@@ -27,8 +43,8 @@
             margin: 8px 0;
             display: inline-block;
             border: 1px solid #ccc;
-            
         }
+
         #inner {
             width: 200%;
             margin: 0 auto;
@@ -42,6 +58,15 @@
             border: none;
             cursor: pointer;
             width: 100%;
+        }
+        #button_language {
+            background-color: #008000;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 23%;
         }
 
             button:hover {
@@ -90,19 +115,16 @@
     <form action="/action_page.php" method="post">
         <!--mettere nome della pagina dove elaborare dati-->
 
-
-
-
         <div class="container">
             <label for="uname"><b>Username</b></label>
             <!--<input type="text" placeholder="Enter Username" id="uname" name="uname" required>-->
             <input class="user-input" placeholder="Enter Username" id="uname" name="uname" required onfocus="user_key(this)" />
             <label for="psw"><b>Password</b></label>
-            <input class="psw-input" placeholder="Enter Password" id="psw" name="psw" required  onfocus="psw_key(this)"/>
+            <input class="psw-input" placeholder="Enter Password" id="psw" name="psw" required onfocus="psw_key(this)" />
             <!--<input type="password" placeholder="Enter Password" id="psw" name="psw" required>-->
 
         </div>
-       
+
         <div class="container">
             <button type="submit">Submit</button>
 
@@ -110,106 +132,220 @@
 
     </form>
 
+
+    <button type="button" onclick="change_ita()" value="ita" id="button_language">Italiano</button>
+    <button type="button" onclick="change_rus()" value="rus" id="button_language">Russo</button>
+    <button type="button" onclick="change_eng()" value="eng" id="button_language">Inglese</button>
+    <button type="button" onclick="change_fr()" value="fr" id="button_language">Francese</button>
     <div class="simple-keyboard" id="inner"></div>
 
-   
-    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
     <script>
-        //$("uname").focus(function () {
-           
-        //    let user_Keyboard = window.SimpleKeyboard.default;
-        //    let user_input = document.querySelector('.user-input');
-        //    let user_keyboard = new user_Keyboard({
-        //        onChange: function (data) { user_input.value = data; }
-        //    })
-        //});
-        //$("psw-input").focus(function () {
-        //    let psw_Keyboard = window.SimpleKeyboard.default;
-        //    let psw_input = document.querySelector('.psw-input');
-        //    let psw_keyboard = new psw_Keyboard({
-        //        onChange: function (data) { psw_input.value = data; }
-        //    })
-        //});
+        function change_ita() {
 
-        //parte dello shift
-        
+            layout = {
+                default: [
+                    "\\ 1 2 3 4 5 6 7 8 9 0 ' \u00EC {bksp}",
+                    "{tab} q w e r t y u i o p \u00E8 +",
+                    "{lock} a s d f g h j k l \u00F2 \u00E0 \u00F9 {enter}",
+                    "{shift} < z x c v b n m , . - {shift}",
+                    ".com @ {space}"
+                ],
+                shift: [
+                    '| ! " \u00A3 $ % & / ( ) = ? ^ {bksp}',
+                    "{tab} Q W E R T Y U I O P \u00E9 *",
+                    "{lock} A S D F G H J K L \u00E7 \u00B0 \u00A7 {enter}",
+                    "{shift} > Z X C V B N M ; : _ {shift}",
+                    ".com @ {space}"
+                ]
+            };
+            user_key();
+
+        }
+
+        function change_rus() {
+            layout = {
+                default: [
+                    "\u0451 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+                    "{tab} \u0439 \u0446 \u0443 \u043a \u0435 \u043d \u0433 \u0448 \u0449 \u0437 \u0445 \u044a \\",
+                    "{lock} \u0444 \u044b \u0432 \u0430 \u043f \u0440 \u043e \u043b \u0434 \u0436 \u044d {enter}",
+                    "{shift} \\ \u044f \u0447 \u0441 \u043c \u0438 \u0442 \u044c \u0431 \u044e / {shift}",
+                    ".com @ {space}"
+                ],
+                shift: [
+                    '\u0401 ! " \u2116 ; % : ? * ( ) _ + {bksp}',
+                    "{tab} \u0419 \u0426 \u0423 \u041a \u0415 \u041d \u0413 \u0428 \u0429 \u0417 \u0425 \u042a /",
+                    "{lock} \u0424 \u042b \u0412 \u0410 \u041f \u0420 \u041e \u041b \u0414 \u0416 \u042d {enter}",
+                    "{shift} / \u042f \u0427 \u0421 \u041c \u0418 \u0422 \u042c \u0411 \u042e / {shift}",
+                    ".com @ {space}"
+                ]
+            };
+
+            user_key();
+        }
+            function change_eng() {
+                layout = {
+                    default: [
+                        "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+                        "{tab} q w e r t y u i o p [ ] \\",
+                        "{lock} a s d f g h j k l ; ' {enter}",
+                        "{shift} z x c v b n m , . / {shift}",
+                        ".com @ {space}"
+                    ],
+                    shift: [
+                        "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
+                        "{tab} Q W E R T Y U I O P { } |",
+                        '{lock} A S D F G H J K L : " {enter}',
+                        "{shift} Z X C V B N M < > ? {shift}",
+                        ".com @ {space}"
+                    ]
+                };
+                user_key();
+
+            }
+        function change_fr() {
+            layout = {
+                default: [
+                    "\u00B2 & \u00E9 \" ' ( - \u00E8 _ \u00E7 \u00E0 ) = {bksp}",
+                    "{tab} a z e r t y u i o p ^ $",
+                    "{lock} q s d f g h j k l m \u00F9 * {enter}",
+                    "{shift} < w x c v b n , ; : ! {shift}",
+                    ".com @ {space}"
+                ],
+                shift: [
+                    "{//} 1 2 3 4 5 6 7 8 9 0 \u00B0 + {bksp}",
+                    "{tab} A Z E R T Y U I O P \u00A8 \u00A3",
+                    "{lock} Q S D F G H J K L M % \u00B5 {enter}",
+                    "{shift} > W X C V B N ? . / \u00A7 {shift}",
+                    ".com @ {space}"
+                ]
+            };
+            user_key();
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
 
 
-        //eventi focus 
+    <script>
+
+        //console.log("ciao", ita);
+        //var lay = "chinese";
+        //eventi focus
         document.getElementById("uname").addEventListener("focusout", destroy_user);
 
         function destroy_user() {
-            user_Keyboard.destroy();
+            //user_Keyboard.destroy();
+            console.log("Mi sposto");
         }
 
         document.getElementById("psw").addEventListener("focusout", destroy_psw);
 
         function destroy_psw() {
-            psw_Keyboard.destroy();
+            // psw_Keyboard.destroy();
+            console.log("Mi sposto");
         }
 
         function user_key() {//tastiera per campo username
-            let user_Keyboard = window.SimpleKeyboard.default;
-            let user_input = document.querySelector('.user-input');
-            let myshift = '';
-            let user_keyboard = new user_Keyboard({
-                onChange: function (data) {
-                    user_input.value = data;
-                },
-                onKeyPress: function (key)
-                {
-                    //if (key === "{shift}") {
-                    //    myshift = 'shift';
-                    //    handleShift('shift');
-                    //}
-                    //else if (key === "{lock}") {
-                    //    if (myshift == 'lock') { myshift = ''; }
-                    //    else { myshift == 'lock' }
-                    //    handleShift('lock');
-                    //}
-                    //else {
-                    //    handleShift('other');
-                    //}
-                    if (key === "{shift}" || key === "{lock}") handleShift();
-                }
-                
-            })
+            let Keyboard = window.SimpleKeyboard.default;
+
+            document.querySelector(".user-input").addEventListener("input", event => {
+                keyboard.setInput(event.target.value);
+            });
+            let keyboard = new Keyboard({
+                onChange: input => onChange(input),
+                onKeyPress: button => onKeyPress(button),
+                layout: layout
+                //layout: {
+                //    default: [
+                //        "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+                //        "{tab} q w e r t y u i o p [ ] \\",
+                //        "{lock} a s d f g h j k l ; ' {enter}",
+                //        "{shift} z x c v b n m , . / {shift}",
+                //        ".com @ {space}"
+                //    ],
+                //    shift: [
+                //        "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
+                //        "{tab} Q W E R T Y U I O P { } |",
+                //        '{lock} A S D F G H J K L : " {enter}',
+                //        "{shift} Z X C V B N M < > ? {shift}",
+                //        ".com @ {space}"
+                //    ]
+                //}
+            });
+
+            function onChange(input) {
+                document.querySelector(".user-input").value = input;
+                console.log("Input changed", input);
+            }
+
+            function onKeyPress(button) {
+                console.log("Button pressed", button);
+                if (button === "{shift}" || button === "{lock}") handleShift();
+            }
+
+            function handleShift() {
+                let currentLayout = keyboard.options.layoutName;
+                console.log("Layout: ", currentLayout);
+                let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+                keyboard.setOptions({
+                    layoutName: shiftToggle
+                });
+            }
 
         }
 
         function psw_key() {//tastiera per campo password
-            let psw_Keyboard = window.SimpleKeyboard.default;
-            let psw_input = document.querySelector('.psw-input');
-            let psw_keyboard = new psw_Keyboard({
-                onChange: function (data) { psw_input.value = data; }
-            })
-        }
 
-        function handleShift(caps) {
-            //let currentLayout = user_keyboard.options.layoutName;
-          
-            //let shiftToggle;
-            //if (caps == 'other') {
-            //    if (myshift == 'shift') {
-            //        myshift = '';
-            //        shiftToggle = "default";
-            //    }
-            //    else if (myshift == 'lock') { shiftToggle = "shift"; }
-            //    else { shiftToggle = "default"; } 
-            //}
-            //else {
-            //    shiftToggle = currentLayout === "default" ? "shift" : "default";
-            //}
-            //user_keyboard.setOptions({ layoutName: shiftToggle})
-            let currentLayout = user_input.options.layoutName;
-            let shiftToggle = currentLayout === "default" ? "shift" : "default";
-
-            keyboard.setOptions({
-                layoutName: shiftToggle
+            let Keyboard = window.SimpleKeyboard.default;
+            document.querySelector(".psw-input").addEventListener("input", event => {
+                keyboard.setInput(event.target.value);
             });
+            let keyboard = new Keyboard({
+                onChange: input => onChange(input),
+                onKeyPress: button => onKeyPress(button),
+                layout: layout
+                //layout: {
+                //    default: [
+                //        "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
+                //        "{tab} q w e r t y u i o p [ ] \\",
+                //        "{lock} a s d f g h j k l ; ' {enter}",
+                //        "{shift} z x c v b n m , . / {shift}",
+                //        ".com @ {space}"
+                //    ],
+                //    shift: [
+                //        "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
+                //        "{tab} Q W E R T Y U I O P { } |",
+                //        '{lock} A S D F G H J K L : " {enter}',
+                //        "{shift} Z X C V B N M < > ? {shift}",
+                //        ".com @ {space}"
+                //    ]
+                //}
+            });
+
+            function onChange(input) {
+                document.querySelector(".psw-input").value = input;
+                console.log("Input changed", input);
+            }
+
+            function onKeyPress(button) {
+                console.log("Button pressed", button);
+                if (button === "{shift}" || button === "{lock}") handleShift();
+            }
+
+            function handleShift() {
+                let currentLayout = keyboard.options.layoutName;
+                console.log("Layout: ", currentLayout);
+                let shiftToggle = currentLayout === "default" ? "shift" : "default";
+
+                keyboard.setOptions({
+                    layoutName: shiftToggle
+                });
+            }
         }
+
+
     </script>
 
-   
+
 </body>
 </html>
