@@ -1,29 +1,15 @@
 ﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!--jquery-->
+<script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-keyboard-layouts@latest/build/index.min.js"></script>
 <script>
-  
-    import ita from "simple-keyboard-layouts/build/layouts/italian";
-    console.log("EHY: ", jap);
+   
+    let KeyboardLayouts = window.SimpleKeyboardLayouts.default;
+    let rus = new KeyboardLayouts().get("russian");
+    let fr = new KeyboardLayouts().get("french");
+    let ita = new KeyboardLayouts().get("italian");
+    let eng = new KeyboardLayouts().get("english");
 </script>
-<script >//il layout principale l'ho dichiarato qua perchè non riesco a fare l'import da file
-    var layout = {
-        default: [
-            "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
-            "{tab} q w e r t y u i o p [ ] \\",
-            "{lock} a s d f g h j k l ; ' {enter}",
-            "{shift} z x c v b n m , . / {shift}",
-            ".com @ {space}"
-        ],
-        shift: [
-            "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
-            "{tab} Q W E R T Y U I O P { } |",
-            '{lock} A S D F G H J K L : " {enter}',
-            "{shift} Z X C V B N M < > ? {shift}",
-            ".com @ {space}"
-        ]
-    };
-    
-</script>
-  
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +49,7 @@
             cursor: pointer;
             width: 100%;
         }
+
         #button_language {
             background-color: #008000;
             color: white;
@@ -73,9 +60,9 @@
             width: 23%;
         }
 
-            button:hover {
-                opacity: 0.8;
-            }
+        button:hover {
+            opacity: 0.8;
+        }
 
         .cancelbtn {
             width: auto;
@@ -146,84 +133,26 @@
     <script>
         function change_ita() {
 
-            layout = {
-                default: [
-                    "\\ 1 2 3 4 5 6 7 8 9 0 ' \u00EC {bksp}",
-                    "{tab} q w e r t y u i o p \u00E8 +",
-                    "{lock} a s d f g h j k l \u00F2 \u00E0 \u00F9 {enter}",
-                    "{shift} < z x c v b n m , . - {shift}",
-                    ".com @ {space}"
-                ],
-                shift: [
-                    '| ! " \u00A3 $ % & / ( ) = ? ^ {bksp}',
-                    "{tab} Q W E R T Y U I O P \u00E9 *",
-                    "{lock} A S D F G H J K L \u00E7 \u00B0 \u00A7 {enter}",
-                    "{shift} > Z X C V B N M ; : _ {shift}",
-                    ".com @ {space}"
-                ]
-            };
+           
+            layout = ita;
             user_key();
 
         }
 
         function change_rus() {
-            layout = {
-                default: [
-                    "\u0451 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
-                    "{tab} \u0439 \u0446 \u0443 \u043a \u0435 \u043d \u0433 \u0448 \u0449 \u0437 \u0445 \u044a \\",
-                    "{lock} \u0444 \u044b \u0432 \u0430 \u043f \u0440 \u043e \u043b \u0434 \u0436 \u044d {enter}",
-                    "{shift} \\ \u044f \u0447 \u0441 \u043c \u0438 \u0442 \u044c \u0431 \u044e / {shift}",
-                    ".com @ {space}"
-                ],
-                shift: [
-                    '\u0401 ! " \u2116 ; % : ? * ( ) _ + {bksp}',
-                    "{tab} \u0419 \u0426 \u0423 \u041a \u0415 \u041d \u0413 \u0428 \u0429 \u0417 \u0425 \u042a /",
-                    "{lock} \u0424 \u042b \u0412 \u0410 \u041f \u0420 \u041e \u041b \u0414 \u0416 \u042d {enter}",
-                    "{shift} / \u042f \u0427 \u0421 \u041c \u0418 \u0422 \u042c \u0411 \u042e / {shift}",
-                    ".com @ {space}"
-                ]
-            };
-
+           
+            layout = rus;
             user_key();
         }
-            function change_eng() {
-                layout = {
-                    default: [
-                        "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
-                        "{tab} q w e r t y u i o p [ ] \\",
-                        "{lock} a s d f g h j k l ; ' {enter}",
-                        "{shift} z x c v b n m , . / {shift}",
-                        ".com @ {space}"
-                    ],
-                    shift: [
-                        "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
-                        "{tab} Q W E R T Y U I O P { } |",
-                        '{lock} A S D F G H J K L : " {enter}',
-                        "{shift} Z X C V B N M < > ? {shift}",
-                        ".com @ {space}"
-                    ]
-                };
-                user_key();
+        function change_eng() {
+           
+            layout = eng;
+            user_key();
 
-            }
+        }
         function change_fr() {
-            //layout = {
-            //    default: [
-            //        "\u00B2 & \u00E9 \" ' ( - \u00E8 _ \u00E7 \u00E0 ) = {bksp}",
-            //        "{tab} a z e r t y u i o p ^ $",
-            //        "{lock} q s d f g h j k l m \u00F9 * {enter}",
-            //        "{shift} < w x c v b n , ; : ! {shift}",
-            //        ".com @ {space}"
-            //    ],
-            //    shift: [
-            //        "{//} 1 2 3 4 5 6 7 8 9 0 \u00B0 + {bksp}",
-            //        "{tab} A Z E R T Y U I O P \u00A8 \u00A3",
-            //        "{lock} Q S D F G H J K L M % \u00B5 {enter}",
-            //        "{shift} > W X C V B N ? . / \u00A7 {shift}",
-            //        ".com @ {space}"
-            //    ]
-            //};
-            layout = jap;
+           
+            layout = fr;
             user_key();
         }
     </script>
@@ -258,23 +187,8 @@
             let keyboard = new Keyboard({
                 onChange: input => onChange(input),
                 onKeyPress: button => onKeyPress(button),
-                layout: layout
-                //layout: {
-                //    default: [
-                //        "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
-                //        "{tab} q w e r t y u i o p [ ] \\",
-                //        "{lock} a s d f g h j k l ; ' {enter}",
-                //        "{shift} z x c v b n m , . / {shift}",
-                //        ".com @ {space}"
-                //    ],
-                //    shift: [
-                //        "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
-                //        "{tab} Q W E R T Y U I O P { } |",
-                //        '{lock} A S D F G H J K L : " {enter}',
-                //        "{shift} Z X C V B N M < > ? {shift}",
-                //        ".com @ {space}"
-                //    ]
-                //}
+                layout: eng
+                
             });
 
             function onChange(input) {
@@ -308,23 +222,8 @@
             let keyboard = new Keyboard({
                 onChange: input => onChange(input),
                 onKeyPress: button => onKeyPress(button),
-                layout: jap
-                //layout: {
-                //    default: [
-                //        "` 1 2 3 4 5 6 7 8 9 0 - = {bksp}",
-                //        "{tab} q w e r t y u i o p [ ] \\",
-                //        "{lock} a s d f g h j k l ; ' {enter}",
-                //        "{shift} z x c v b n m , . / {shift}",
-                //        ".com @ {space}"
-                //    ],
-                //    shift: [
-                //        "~ ! @ # $ % ^ & * ( ) _ + {bksp}",
-                //        "{tab} Q W E R T Y U I O P { } |",
-                //        '{lock} A S D F G H J K L : " {enter}',
-                //        "{shift} Z X C V B N M < > ? {shift}",
-                //        ".com @ {space}"
-                //    ]
-                //}
+                layout: eng
+               
             });
 
             function onChange(input) {
