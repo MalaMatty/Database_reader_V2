@@ -97,6 +97,7 @@
     <Content Include="Login\Jquery.js" />
     <Content Include="Login\jquery.ml-keyboard.css" />
     <Content Include="Login\jquery.ml-keyboard.min.js" />
+    <Content Include="Login\Keyboard_index.css" />
     <Content Include="Login\layouts\arabic.js" />
     <Content Include="Login\layouts\burmese.js" />
     <Content Include="Login\layouts\chinese.js" />
