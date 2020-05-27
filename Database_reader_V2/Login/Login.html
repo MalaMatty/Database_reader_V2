@@ -1,13 +1,14 @@
-﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!--jquery-->
-<script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/simple-keyboard-layouts@latest/build/index.min.js"></script>
+﻿
+<script src="Layout_index.js"></script>
+<script src="keyboard_index.js"></script>
+<script src="Jquery.js"></script>
 <script>
-   
     let KeyboardLayouts = window.SimpleKeyboardLayouts.default;
     let rus = new KeyboardLayouts().get("russian");
     let fr = new KeyboardLayouts().get("french");
     let ita = new KeyboardLayouts().get("italian");
     let eng = new KeyboardLayouts().get("english");
+    let layout = eng;
 </script>
 
 <!DOCTYPE html>
@@ -161,8 +162,7 @@
 
     <script>
 
-        //console.log("ciao", ita);
-        //var lay = "chinese";
+        
         //eventi focus
         document.getElementById("uname").addEventListener("focusout", destroy_user);
 
@@ -187,7 +187,7 @@
             let keyboard = new Keyboard({
                 onChange: input => onChange(input),
                 onKeyPress: button => onKeyPress(button),
-                layout: eng
+                layout: layout
                 
             });
 
@@ -222,7 +222,7 @@
             let keyboard = new Keyboard({
                 onChange: input => onChange(input),
                 onKeyPress: button => onKeyPress(button),
-                layout: eng
+                layout: layout
                
             });
 

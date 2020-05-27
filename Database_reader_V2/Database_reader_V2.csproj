@@ -94,6 +94,7 @@
     <Content Include="Global.asax" />
     <Content Include="Login\index.css" />
     <Content Include="Login\index.js" />
+    <Content Include="Login\Jquery.js" />
     <Content Include="Login\jquery.ml-keyboard.css" />
     <Content Include="Login\jquery.ml-keyboard.min.js" />
     <Content Include="Login\layouts\arabic.js" />
@@ -119,6 +120,7 @@
     <Content Include="Login\layouts\turkish.js" />
     <Content Include="Login\layouts\ukrainian.js" />
     <Content Include="Login\layouts\urdu.js" />
+    <Content Include="Login\Layout_index.js" />
     <Content Include="Pdf\1930201.pdf" />
     <Content Include="Pdf\1930201_Cleaning.pdf" />
     <Content Include="Pdf\11151LOT01.pdf" />
@@ -127,6 +129,7 @@
     <Content Include="Pdf\Js\pdf.worker.js.map" />
     <Content Include="Pdf\Turing.pdf" />
     <Content Include="Active_directory\ViewPage1.cshtml" />
+    <Content Include="Login\keyboard_index.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Pdf\Js\main.js" />
     <Content Include="Pdf\Js\pdf.js" />
