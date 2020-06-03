@@ -39,10 +39,10 @@ namespace Database_reader_V2.Models
                     {
                         Rep_Id = Convert.ToString(dr["Rep_Id"]),
                         Rep_Lot_Id = Convert.ToString(dr["Rep_Lot_Id"]),
-                        Rep_PDFToCreate = Convert.ToBoolean(dr["Rep_PDFToCreate"]),
-                        Rep_PDFCreated = Convert.ToBoolean(dr["Rep_PDFCreated"]),
+                        Rep_PDFStatus = Convert.ToInt32(dr["Rep_PDFStatus"]),
+                        //Rep_PDFCreated = Convert.ToBoolean(dr["Rep_PDFCreated"]),
                         Rep_Status = Convert.ToInt32(dr["Rep_Status"]),
-                        Rep_Type = Convert.ToString(dr["Rep_Type"])
+                        Rep_Type = Convert.ToInt32(dr["Rep_Type"])
 
                     });
             }
@@ -69,13 +69,13 @@ namespace Database_reader_V2.Models
                 reportlist.Add(
                     new Report
                     {
+                       
                         Rep_Id = Convert.ToString(dr["Rep_Id"]),
                         Rep_Lot_Id = Convert.ToString(dr["Rep_Lot_Id"]),
-                        Rep_PDFToCreate = Convert.ToBoolean(dr["Rep_PDFToCreate"]),
-                        Rep_PDFCreated = Convert.ToBoolean(dr["Rep_PDFCreated"]),
+                        Rep_PDFStatus = Convert.ToInt32(dr["Rep_PDFStatus"]),
+                        
                         Rep_Status = Convert.ToInt32(dr["Rep_Status"]),
-                        Rep_Type = Convert.ToString(dr["Rep_Type"])
-
+                        Rep_Type = Convert.ToInt32(dr["Rep_Type"])
                     });
             }
             return reportlist;

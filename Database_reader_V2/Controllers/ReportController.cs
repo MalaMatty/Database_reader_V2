@@ -24,18 +24,16 @@ namespace Database_reader_V2.Controllers
             }
             else if(searchString!=null && search_radio==null)
             {
-                sqlquery = "select * from [dbo].[RPT_Lots_Report] where Rep_Lot_ID like '" + searchString + "'";
-               /* sqlquery = "select [dbo].[RPT_Lots_Report].[Rep_Lot_Id],[dbo].[RPT_Lots_Report].[Rep_Id],[dbo].[RPT_Lots_Report].[Rep_PDFToCreate],[dbo].[RPT_Lots_Report].[Rep_PDFCreated],[dbo].[RPT_Lots_Report].[Rep_Status],[dbo].[RPT_Lots_Report].[Rep_Type]" +
-                    " from [dbo].[RPT_Lots_Report],[dbo].[RPT_Lots_Info]" +
-
-                    " where [dbo].[RPT_Lots_Info].[Lot_Stop] ='" + searchString + "'";*/
+                sqlquery = "select * from [dbo].[RPT_Lots_Report] JOIN  [dbo].[RPT_Lots_Info] ON ([dbo].[RPT_Lots_Info].[Lot_Id] = [dbo].[RPT_Lots_Report].[Rep_Lot_Id]) where [dbo].[RPT_Lots_Info].[Lot_Code] like '" + searchString + "'";
+               
             }
             else if(search_radio == "last_week")
             {
-                sqlquery = "select [dbo].[RPT_Lots_Report].[Rep_Lot_Id],[dbo].[RPT_Lots_Report].[Rep_Id],[dbo].[RPT_Lots_Report].[Rep_PDFToCreate],[dbo].[RPT_Lots_Report].[Rep_PDFCreated],[dbo].[RPT_Lots_Report].[Rep_Status],[dbo].[RPT_Lots_Report].[Rep_Type],[dbo].[RPT_Lots_Info].[Lot_Stop] as Stop_date" +
-                    " from [dbo].[RPT_Lots_Report],[dbo].[RPT_Lots_Info]" +
+                //sqlquery = "select [dbo].[RPT_Lots_Report].[Rep_Lot_Id],[dbo].[RPT_Lots_Report].[Rep_Id],[dbo].[RPT_Lots_Report].[Rep_PDFToCreate],[dbo].[RPT_Lots_Report].[Rep_PDFCreated],[dbo].[RPT_Lots_Report].[Rep_Status],[dbo].[RPT_Lots_Report].[Rep_Type],[dbo].[RPT_Lots_Info].[Lot_Stop] as Stop_date" +
+                //    " from [dbo].[RPT_Lots_Report],[dbo].[RPT_Lots_Info]" +
 
-                    "where [dbo].[RPT_Lots_Info].[Lot_Stop] >= DATEADD(day,-7, GETDATE())";
+                //    "where [dbo].[RPT_Lots_Info].[Lot_Stop] >= DATEADD(day,-7, GETDATE())";
+                sqlquery = "select * from [dbo].[RPT_Lots_Report] JOIN[dbo].[RPT_Lots_Info] ON([dbo].[RPT_Lots_Info].[Lot_Id] = [dbo].[RPT_Lots_Report].[Rep_Lot_Id]) where [dbo].[RPT_Lots_Info].[Lot_Stop]>= DATEADD(day, -7, GETDATE()) ";
             }
             else if(search_radio == "date_selection" && searchString!=null)
             {
@@ -48,7 +46,7 @@ namespace Database_reader_V2.Controllers
             {
                 sqlquery = "select * from [dbo].[RPT_Lots_Report]"; //modificare
             }
-
+            //sqlquery = "select * from [dbo].[RPT_Lots_Report]";
 
             SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
             sqlconn.Open();
@@ -64,10 +62,9 @@ namespace Database_reader_V2.Controllers
                 {
                     Rep_Id = Convert.ToString(dr["Rep_Id"]),
                     Rep_Lot_Id = Convert.ToString(dr["Rep_Lot_Id"]),
-                    Rep_PDFToCreate = Convert.ToBoolean(dr["Rep_PDFToCreate"]),
-                    Rep_PDFCreated = Convert.ToBoolean(dr["Rep_PDFCreated"]),
-                    Rep_Status = Convert.ToInt16(dr["Rep_Status"]),
-                    Rep_Type = Convert.ToString(dr["Rep_Type"]),
+                    Rep_PDFStatus = Convert.ToInt32(dr["Rep_PDFStatus"]),
+                    Rep_Status = Convert.ToInt32(dr["Rep_Status"]),
+                    Rep_Type = Convert.ToInt32(dr["Rep_Type"]),
                 }
                     );
             }

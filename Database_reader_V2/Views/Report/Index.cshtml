@@ -2,8 +2,8 @@
 
 <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
+<script src="~/Scripts/Datepicker.js"></script>
+<link rel="stylesheet" href="~/Scripts/jquery-ui.css" />
 
 
 <!-- css relativo alla tabella -->
@@ -25,25 +25,7 @@
     }
 </style>
 
-<!-- css relativo alla textbox
-<style>
-    input[type=text] {
-        position: absolute;
-        width: 150px;
-        border: 2px solid #aaa;
-        border-radius: 4px;
-        outline: none;
-        padding: 8px;
-        box-sizing: border-box;
-        transition: .3s;
-        top: 5px;
-    }
 
-        input[type=text]:focus {
-            border-color: dodgerBlue;
-            box-shadow: 0 0 8px 0 dodgerBlue;
-        }
-</style>-->
 
 <style>
     #Search {
@@ -59,33 +41,25 @@
         display: inline-block;
     }
 </style>
-<!--
-/<div id="Search">
-    <div id="bloc1">
-        <label for="Id_filter">Lot Id Filter:</label>
-    </div>
 
-    <div id="bloc1"> <input type="text" id="Id_filter" name="Id_filter"></div>
-
-
-</div>
-<button type="button" id="search" style="position: absolute; left:1050px; top:5px; height:20px;"> Search</button>
--->
-<!-- filtri vecchi
-<div id="filter">
-    <label for="Time_filter" style="position: absolute; left: 20px; top:10px">Time Filter</label><br>
-    <input type="radio" name="color" value="all"> All <br>
-    <input type="radio" name="color" value="last week"> Last week <br>
-    <input type="radio" name="color" value="date Seletion">Date Seletion <br>
-</div>-->
 <!--filtri fatti con altro meotodo-->
 <center>
     @using (Html.BeginForm("Index", "Report", FormMethod.Get))
     {
+        <a>Filters:</a>
         @Html.RadioButton("search_radio", "all")<span>All</span>
         @Html.RadioButton("search_radio", "last_week")<span>Last week</span>
         @Html.RadioButton("search_radio", "date_selection")<span>Date Selection</span>
-        @Html.TextBox("searchString")<span>Search by name</span>
+        <br />
+        <span>Search by name</span>@Html.TextBox("searchString")
+        <span>From</span> @Html.TextBox("from_date")
+        <span>To</span> @Html.TextBox("to_date")
+        <script>
+            $(function () {
+                $("#from_date").datepicker();
+                $("#to_date").datepicker();
+            });
+        </script>
         <input type="submit" value="Search" />
 
 
@@ -102,11 +76,11 @@
                     @Html.DisplayNameFor(model => model.Rep_Lot_Id)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Rep_PDFToCreate)
+                    @Html.DisplayNameFor(model => model.Rep_PDFStatus)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Rep_PDFCreated)
-                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Rep_PDFCreated)
+                    </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.Rep_Status)
                 </th>
@@ -131,11 +105,11 @@
                         @Html.DisplayFor(modelItem => item.Rep_Lot_Id, new { id = "RepId" + i }) <!--forzo creazione di un id-->
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Rep_PDFToCreate)
+                        @Html.DisplayFor(modelItem => item.Rep_PDFStatus)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Rep_PDFCreated)
-                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Rep_PDFCreated)
+                        </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.Rep_Status)
                     </td>
@@ -168,11 +142,7 @@
     }
 </script>
 <br>
-<!-- pulsante pdf
-<button onclick="OpenPdf()" type="button" id="submit" style="position: absolute; text-align:center ">
-    report pdf
-</button>
-<br>-->
+
 <!-- parte relativa alla visone del pdf tramite un iframe-->
 
 <div>
@@ -190,19 +160,7 @@
     document.getElementById("review").disabled = true;
 </script>
 
-<!-- <script>
-    function check() {
-        var end = sessionStorage.getItem("end_pages");
 
-        if (end) {
-            document.getElementById("validate").disabled = false;
-            document.getElementById("review").disabled = false;
-        }
-        alert("I am an alert box!" + end);
-    }
-
-
-</script> parte relativa al trasferimento variabili da una pagina all'altra,tengo come esempio attualmente-->
 <button type="button" id="ck" onclick="check()" style=" position: absolute; left:1250px; top:590px; height:20px;"> Check</button>
 
 
@@ -214,17 +172,4 @@
 </script>
 
 <button type="button" id="ad" onclick="btnLogin_Click" style=" position: absolute; left:1250px; top:650px; height:20px;"> Test AD</button>
-<!--
-<script>
-    function setUserID(end) {
-        $('#end').val(end)
-            .trigger('change');
-    }
-</script>
 
-<script>
-    $('#userid').change(function () {
-        document.getElementById("validate").disabled = true;
-        document.getElementById("review").disabled = true;
-    })
-</script> parte in jquery che va eliminata ma può servire per la barra di ricerca -->
